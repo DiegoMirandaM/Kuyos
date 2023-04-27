@@ -15,12 +15,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="es">
-      <body className="h-screen bg-grey-blue">
+      <body className="bg-grey-blue">
 
-        <div id="header" className="bg-header-blue py-4 flex self-center">
+        <div id="header" className="bg-header-blue flex self-center">
 
-          <Link className="self-center w-2/6 ml-2 mr-[4vw] flex-shrink-0 sm:w-32 sm:ml-4" href="/">
-            <Image src={logo} alt="Logo Kuyos"/>
+          <Link className="self-center w-2/6 ml-2 mr-[4vw] py-2 flex-shrink-0 sm:w-32 sm:ml-4" href="/">
+            <Image priority src={logo} alt="Logo Kuyos"/>
           </Link>
 
           <Navegacion />
