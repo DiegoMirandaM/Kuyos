@@ -6,7 +6,7 @@ import Categorias from "./components/Categorias";
 export default function HomePage() {
     return (
         <>
-            <div id="texto-grande" className=" text-[15vw] my-10 uppercase text-primary-pink text-center font-bold md:text-9xl/tight">
+            <div id="texto-grande" className=" text-[15vw] my-8 uppercase text-primary-pink text-center font-bold md:text-9xl/tight">
                 <h2 >Con Kuyos</h2>
                 <h2 className=" text-[7vw] bg-primary-pink text-grey-blue mx-auto sm:pt-2 w-[80vw] rounded-[0.5rem]">diseñamos juntos</h2>
                 <h2 id="texto-grande-cambiante" className=" text-[10vw] lg:text-[6vw] tracking-[2vw] mt-3">Logotipos</h2>
