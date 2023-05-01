@@ -1,5 +1,4 @@
 import { supabase } from "../lib/supabaseClient";
-import Link from "next/link";
 import Image from "next/image";
 
 async function getProjects() {
@@ -10,7 +9,10 @@ async function getProjects() {
         .order('update_date', { ascending: false })
         .limit(2);
 
-    // Idealmente, la url de la img principal debiese poder conseguirse sin recuperar todavia todas las imgs.
+    // MEJORAR ESTO: Recuperar proys sin imgs, y recuperar imgs principales donde el id_proyecto sea el de los proys recuperados.
+    // Luego tomar los objetos que contienen las imgs, e insertarlas como propiedad de los objetos proyecto.
+
+    // Asi no se recuperan innecesariamente imgs que no van a ser usadas, y se tiene acceso a mas props de las imgs principales.
 
     if (res.status !== 200) {
         throw new Error(`Recuperar los proyectos falló. \n${res.error} `);
@@ -23,7 +25,7 @@ async function getProjects() {
         if (proy.mainImg == undefined) {
             // Si tampoco hay imagenes, usar img no encontrada. Reemplazar esta img por una propia idealmente
             if (proy.Imagen_02.length === 0) {
-                proy.mainImg = 'https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-1-scaled-1150x647.png';
+                proy.mainImg = 'https://cvruycddlqkyjmelqdta.supabase.co/storage/v1/object/sign/kuyos/placeholder-image-not-found.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJrdXlvcy9wbGFjZWhvbGRlci1pbWFnZS1ub3QtZm91bmQucG5nIiwiaWF0IjoxNjgyOTIxNDkxLCJleHAiOjE5OTgyODE0OTF9.nVM0EhxCWegNgyOvyKDjM89088kPiy4JCeV929-dDrw&t=2023-05-01T06%3A11%3A31.991Z';
                 return proy;
             }
             proy.mainImg = proy.Imagen_02[0].url;
@@ -32,68 +34,40 @@ async function getProjects() {
         return proy;
     }, {})
 
-    console.log(finalRes);
-
-    //console.log(Object.values(finalRes));
-
     return finalRes;
-
-
 }
 
-export default async function Proyectos() { 
-    //const proyectos = getProjects();
-    getProjects();
-
-
-
+export default async function Proyectos() {
+    const proyectos = await getProjects();
 
     return (
         <>
-            <h1>*Aquí van los últimos dos proyectos   *</h1>
-
             <div className=" block sm:flex">
-                
-                <div className=" w-11/12 h-40 mt-4 block bg-blue-800 mx-auto rounded-md hover:cursor-pointer sm:w-2/5 ">
-                    <Link href={'#'}
-                    >
-                        <Image href='./../../public/kuyos_logo_miniatura.png' />
-                    </Link>
-                </div>
 
-                <div className=" w-11/12 h-40 mt-4 block bg-blue-800 mx-auto rounded-md hover:cursor-pointer sm:w-2/5 ">
-                    <Link href={'#'}
-                    >
-                        <Image href='./../../public/kuyos_logo_miniatura.png' />
-                    </Link>
-                </div>
-                
+                {Object.values(proyectos).map(proy => (
+                    <div key={proy.id_proyecto}
+                    className="relative w-11/12 h-52 mt-4 block bg-header-blue border-2 border-primary-pink mx-auto rounded-md 
+                    hover:cursor-pointer 
+                    sm:w-2/5 sm:h-64">
+                        <Image
+                        src={proy.mainImg}
+                        fill={true}
+                        className="py-8 object-contain"
+                        />
 
-
-                {/*
-                {Object.values(proyectos).map((proy) => (
-                    <div key={proy.id_proyecto} className=" w-11/12 h-40 mt-4 block bg-blue-800 mx-auto hover:cursor-pointer sm:w-2/5">
-
-                        <Image src={proy.mainImg} />
-
+                        {/* Este sera el div desplegable con la descripcion del proyecto y un boton para entrar a ver mas trabajos relacionados a ese proyecto. 
+                        <div className="  ">
+                            <h3></h3>
+                            <button>Ver diseños relacionados</button>
+                        </div>
+                        */}
 
                     </div>
                 ))}
-                 */}
 
 
             </div>
-            {/*
-            <ul>
 
-                
-                {Object.keys(proyectos).map((proy, index) => (
-                    <li key={index}> {proy.nombre} </li>
-                ))}
-                
-
-            </ul>
-            */}
         </>
     );
 }

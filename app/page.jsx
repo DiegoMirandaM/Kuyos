@@ -14,6 +14,8 @@ export default function HomePage() {
 
             <hr className=" bg-primary-pink pt-1 border-0 w-11/12 mx-auto" />
 
+            <h2 className=" text-light-blue text-center my-7 text-3xl font-bold sm:text-4xl">Conoce algunos de <span className="text-primary-pink">nuestros proyectos</span></h2>
+
             <Proyectos />
 
             <Categorias />
