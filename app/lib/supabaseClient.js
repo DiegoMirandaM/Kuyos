@@ -45,8 +45,6 @@ export async function getImagesFromProject(projectId) {
         .from('Imagen_02')
         .select(`id_imagen, nombre, url, es_principal`)
         .eq('id_proyecto', projectId)
-        .limit(3)
-        // Remover el limit para cuando ya este funcionando bien
 
     if (res.status !== 200) {
         throw new Error(`Recuperar los proyectos falló. \n${res.error} `);

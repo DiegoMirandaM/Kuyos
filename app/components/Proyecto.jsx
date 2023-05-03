@@ -28,7 +28,7 @@ export default function Proyecto({ proyecto }) {
 
             <div id='desc' className={`${isExpanded ? 'grid' : 'hidden'} bg-light-blue rounded-md  h-fit sm:h-48`}>
                 <h3 className="p-4">{proyecto.desc}</h3>
-                <Link href={`/proyecto/${proyecto.id_proyecto}`} className="mb-5 ml-4 py-2 px-10 bg-primary-pink rounded-md w-fit h-fit self-end font-bold">Ver diseños relacionados</Link>
+                <Link href={`/proyecto/${proyecto.id_proyecto}_${proyecto.nombre}`} pa className="mb-5 ml-4 py-2 px-10 bg-primary-pink rounded-md w-fit h-fit self-end font-bold">Ver diseños relacionados</Link>
             </div>
         </div>
     )
