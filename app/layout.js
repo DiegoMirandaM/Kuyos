@@ -1,12 +1,13 @@
 import "./../styles/globals.css"
 import Link from "next/link"
 import Image from "next/image"
+import { Analytics } from '@vercel/analytics/react';
 
 import logo from "../public/kuyos_logo_pagina_web.png"
 import Navegacion from "./components/Navegacion";
 
 export const metadata = {
-  title: 'Kuyos',
+  title: 'Kuyos: Diseño Gráfico',
   icons: {
     icon: '/kuyos_logo_miniatura.png'
   }
@@ -24,10 +25,10 @@ export default function RootLayout({ children }) {
           </Link>
 
           <Navegacion />
-          
         </div>
 
         {children}
+        <Analytics />
 
       </body>
     </html>
